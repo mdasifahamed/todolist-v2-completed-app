@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-asif:Idgaf@96321@todolist.wbacm.mongodb.net/todolistDB", {useNewUrlParser: true});// Adding to the mongo atlas cloud using this url and userid and pass 
+mongoose.connect("mongodb+srv://admin-asif:Idgaf@96321@todolist.wbacm.mongodb.net/todolistDB", {useNewUrlParser: true});// Adding to the mongo atlas cloud using this url and userid and pass
 
 const itemsSchema = {
   name: String
@@ -134,7 +134,12 @@ app.post("/delete", function(req, res){
 app.get("/about", function(req, res){
   res.render("about");
 });
+// Thsi Line for port declaring is from heroku to use their port
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(port, function() {
+  console.log("Server started successfully");
 });
